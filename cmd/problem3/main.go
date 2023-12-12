@@ -4,7 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
-	"regexp"
+	"strings"
 )
 
 func check(e error) {
@@ -19,20 +19,23 @@ func main() {
 	fileScanner := bufio.NewScanner(dat)
 	fileScanner.Split(bufio.ScanLines)
 
-	// var onlyNumberLines []string
+	var matrix [][]string
 	// numbersReg := regexp.MustCompile(`[0-9]+`)
-	signsReg := regexp.MustCompile(`[^\w|\d|\.]`)
+	// signsReg := regexp.MustCompile(`[^\w|\d|\.]`)
 
 	for fileScanner.Scan() {
 		str := fileScanner.Text()
-		res := signsReg.FindAllStringIndex(str, -1)
-		fmt.Println(res)
-		fmt.Println("\n")
-		// onlyNumberLines = append(onlyNumberLines, res)
+		// res := signsReg.FindAllStringIndex(str, -1)
+		// fmt.Println(res)
+		// fmt.Println("\n")
+		sli := strings.Split(str, "")
+		matrix = append(matrix, sli)
 	}
 
-	// for _, number := range onlyNumberLines {
-	// 	fmt.Println(number)
-	// }
-	dat.Close()
+	for i := 3; i < 6; i++ {
+		for j := 3; j < 6; j++ {
+			fmt.Printf("%s ", matrix[i][j])
+		}
+		fmt.Printf("\n")
+	}
 }
